@@ -61,6 +61,8 @@ class InfoReader:
                     emails.append(s)
 
         for link in self.content["urls"]:
+            if link is None:
+                continue
             if "mailto:" in link:
                 emails.append(link.replace("mailto:", ""))
 
