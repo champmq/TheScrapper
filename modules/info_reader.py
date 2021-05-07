@@ -44,7 +44,7 @@ class InfoReader:
                         n: object = n.replace(letter, "")
                     numbers.append(n)
 
-        return numbers
+        return list(dict.fromkeys(numbers))
 
     def getEmails(self) -> list:
         """getEmails Function
@@ -66,7 +66,7 @@ class InfoReader:
             if "mailto:" in link:
                 emails.append(link.replace("mailto:", ""))
 
-        return emails
+        return list(dict.fromkeys(emails))
 
     def getSocials(self) -> list:
         """getSocials Function
@@ -84,4 +84,4 @@ class InfoReader:
                 if s.replace("\n", "").lower() in url.lower():
                     sm_accounts.append(url)
 
-        return sm_accounts
+        return list(dict.fromkeys(sm_accounts))
