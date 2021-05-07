@@ -79,6 +79,8 @@ class InfoReader:
 
         for url in self.content["urls"]:
             for s in socials:
+                if url is None:
+                    continue
                 if s.replace("\n", "").lower() in url.lower():
                     sm_accounts.append(url)
 
