@@ -19,7 +19,7 @@ banner = """
 print(banner +
       "*" * 40 + "\n" + "This tool will scrape emails\nand social media accounts." + "\n" + "*" * 40 +
       "\n")
-main_url = input("Enter the URL of the website:")
+main_url = input("Enter the URL of the website: ")
 other_urls = input("Enter other URLS like the imprint in this format: (URL1, URL2, URL3, ...): ")
 
 urls = [main_url]
