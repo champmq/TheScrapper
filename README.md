@@ -11,7 +11,7 @@ pip3 install bs4 requests
 
 ## Usage
 ```bash
-python TheScrapper.py
+python3 TheScrapper.py
 ```
 
 ![](https://i.ibb.co/ZLvYcCS/image.png)
