@@ -5,3 +5,4 @@ twitter.com
 facebook.com
 linkedin.com
 github.com
+medium.com
