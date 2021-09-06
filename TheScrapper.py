@@ -34,12 +34,12 @@ try:
   urls = Scrapper(contents=contents, urls=[main_url]).getURLs()
   IR = InfoReader(content={"text": cleaned_contents, "urls": urls})
   emails: list = IR.getEmails()
-  # numbers = IR.getPhoneNumber()
+  numbers = IR.getPhoneNumber()
   sm: list = IR.getSocials()
 
   print("\n")
   print("E-Mails: " + ", ".join(emails))
-  # print("Numbers:" + ", ".join(numbers))
+  print("Numbers:" + ", ".join(numbers))
   print("SocialMedia: " + ", ".join(sm))
 except MissingSchema:
   print("Invalid Website schema!\nExample: https://github.com/champmq/")
