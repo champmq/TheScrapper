@@ -1,5 +1,5 @@
 # TheScrapper
-This tool will scrape emails and Social Media accounts from a website
+This tool will scrape emails, phone numbers and Social Media accounts from a website
 
 ## Installation & Setup
 
