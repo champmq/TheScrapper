@@ -1,6 +1,7 @@
-import requests
-from requests.models import MissingSchema
+from argparse import ArgumentParser
 
+import requests
+from requests.exceptions import MissingSchema
 from modules.scrapper import Scrapper
 from modules.info_reader import InfoReader
 
@@ -17,29 +18,35 @@ banner: str = """
                                  ░                                                            
                                   
 """
-print(banner +
-      "*" * 40 + "\n" + "This tool will scrape emails\nand social media accounts." + "\n" + "*" * 40 +
-      "\n")
-main_url: str = input("Enter the URL of the website: ")
-other_urls: str = input("Enter other URLS like the imprint in this format: (URL1, URL2, URL3, ...): ")
+
+
+parser = ArgumentParser(description="TheScrapper - Contact finder")
+parser.add_argument("-u", "--url", required=True,
+                    help="The URL of the target.")
+parser.add_argument("-c", "--crawl", default=True, required=False, action="store_true",
+                    help="Use every URL found on the site and hunt it down for information.")
+parser.add_argument("-b", "--banner", default=False, required=False, action="store_true",
+                    help="Use every URL found on the site and hunt it down for information.")
+args = parser.parse_args()
+
+if not args.banner:
+    print(banner)
+
+print("*" * 50 + "\n" + f"TheScrapper - Find possible ways to contact a site.\nTarget: {args.url}" + "\n" + "*" * 50 + "\n")
 
 try:
-  urls: list = [main_url]
-
-  if other_urls != "":
-      [urls.append(u) for u in other_urls.split(",")]
-
-  contents: list = [requests.get(u).text for u in urls]
-  cleaned_contents: list = Scrapper(urls=urls).getText()
-  urls = Scrapper(contents=contents, urls=[main_url]).getURLs()
-  IR = InfoReader(content={"text": cleaned_contents, "urls": urls})
-  emails: list = IR.getEmails()
-  numbers = IR.getPhoneNumber()
-  sm: list = IR.getSocials()
-
-  print("\n")
-  print("E-Mails: " + ", ".join(emails))
-  print("Numbers:" + ", ".join(numbers))
-  print("SocialMedia: " + ", ".join(sm))
+    requests.get(args.url)
 except MissingSchema:
-  print("Invalid Website schema!\nExample: https://github.com/champmq/")
+    raise "MissingSchema, please add http(s). Example: https://example.com"
+
+url: str = args.url
+scrap = Scrapper(url=url, crawl=args.crawl)
+IR = InfoReader(content={"text": scrap.getText(), "urls": scrap.getURLs()})
+emails: list = IR.getEmails()
+numbers = IR.getPhoneNumber()
+sm: list = IR.getSocials()
+
+print("\n")
+print("E-Mails: " + ", ".join(emails))
+print("Numbers:" + ", ".join(numbers))
+print("SocialMedia: " + ", ".join(sm))

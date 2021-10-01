@@ -6,12 +6,12 @@ class InfoReader:
     """
     InfoReader Class
     """
-    def __init__(self, content: object = None, social_path: object = "./socials.txt") -> None:
+    def __init__(self, content: dict = None, social_path: str = "./socials.txt") -> None:
         """Contructor
 
         Args:
-            content (object, optional): [description]. Defaults to None.
-            social_path (object, optional): [description]. Defaults to "./socials.txt".
+            content (dict): [description]. Defaults to None.
+            social_path (str): [description]. Defaults to "./socials.txt".
         """
 
         if content is None:
@@ -20,9 +20,9 @@ class InfoReader:
                 "urls": []
             }
 
-        self.content: object = content
-        self.social_path: object = social_path
-        self.res: dict =  {
+        self.content: list = content
+        self.social_path: str = social_path
+        self.res: dict = {
             "phone": "/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,7}$/gm",
             "email": r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
         }
@@ -35,7 +35,7 @@ class InfoReader:
         """
         # Doesnt work that good
         numbers: list = []
-        texts: object = self.content["text"]
+        texts: list = self.content["text"]
         
         for text in texts:
             for n in text.split("\n"):

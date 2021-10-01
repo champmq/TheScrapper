@@ -7,3 +7,4 @@ linkedin.com
 github.com
 medium.com
 reddit.com
+pinterest.com
