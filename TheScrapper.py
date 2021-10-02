@@ -27,6 +27,8 @@ parser.add_argument("-c", "--crawl", default=True, required=False, action="store
                     help="Use every URL found on the site and hunt it down for information.")
 parser.add_argument("-b", "--banner", default=False, required=False, action="store_true",
                     help="Use every URL found on the site and hunt it down for information.")
+parser.add_argument("-s", "--sm", default=True, required=False, action="store_true",
+                    help="Extract infos from the SocialMedia accounts.")
 args = parser.parse_args()
 
 if not args.banner:
@@ -47,6 +49,19 @@ numbers = IR.getPhoneNumber()
 sm: list = IR.getSocials()
 
 print("\n")
-print("E-Mails: " + ", ".join(emails))
-print("Numbers:" + ", ".join(numbers))
-print("SocialMedia: " + ", ".join(sm))
+print("E-Mails: " + "\n - ".join(emails))
+print("Numbers:" + "\n - ".join(numbers))
+if args.sm:
+    print("SocialMedia: ")
+    sm_info = IR.getSocialsInfo()
+    for x in sm_info:
+        url = x["url"]
+        info = x["info"]
+        if info:
+            print(f" - {url}:")
+            for y in info:
+                print(f"     - {y}: {info[y]}")
+        else:
+            print(f" - {url}")
+else:
+    print("SocialMedia: " + ", ".join(sm))

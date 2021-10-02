@@ -1,11 +1,14 @@
 import re
 import string
+from socid_extractor import parse, extract
+from typing import List
 
 
 class InfoReader:
     """
     InfoReader Class
     """
+
     def __init__(self, content: dict = None, social_path: str = "./socials.txt") -> None:
         """Contructor
 
@@ -36,7 +39,7 @@ class InfoReader:
         # Doesnt work that good
         numbers: list = []
         texts: list = self.content["text"]
-        
+
         for text in texts:
             for n in text.split("\n"):
                 if re.match(self.res["phone"], n):
@@ -83,5 +86,12 @@ class InfoReader:
                     continue
                 if s.replace("\n", "").lower() in url.lower():
                     sm_accounts.append(url)
-
         return list(dict.fromkeys(sm_accounts))
+
+    def getSocialsInfo(self) -> List[dict]:
+        urls = self.getSocials()
+        sm_info = []
+        for url in urls:
+            text, _ = parse(url)
+            sm_info.append({"url": url, "info": extract(text)})
+        return sm_info

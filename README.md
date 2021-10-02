@@ -16,6 +16,8 @@ pip3 install -r requirements.txt
 python3 TheScrapper.py --url URL
 # Use found URLS and scan them too
 python3 TheScrapper.py --url URL --crawl
+# Get more info about the found socialmedia accounts
+python3 TheScrapper.py --url URL -s
 ```
 *If you dont like the banner just add "-b".*
 <br>
