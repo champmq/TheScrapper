@@ -1,8 +1,5 @@
 # TheScrapper
 
-![](https://github.com/champmq/github-stats/blob/master/generated/overview.svg)
-![](https://github.com/champmq/github-stats/blob/master/generated/languages.svg)
-
 Scrape emails, phone numbers and social media accounts from a website. <br>
 You can use the found information to gather more information or just find ways to contact the site.
 
