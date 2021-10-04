@@ -28,6 +28,7 @@ python3 TheScrapper.py --url URL -s
 If you want to add more SocialMedia sites just append them to the [`socials.txt`](./socials.txt) file and if you want, you can add them with a [pull request](https://www.lifewire.com/best-products-4781319).
 
 ## TODO
+ - [ ] Verbose Mode
  - [ ] API
 
 # Bugs or ideas?
