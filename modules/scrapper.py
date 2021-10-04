@@ -65,24 +65,24 @@ class Scrapper:
             urls.append(link.get("href"))
         return urls
 
-    def getText(self) -> list:
+    def getText(self) -> dict:
         """getText function
 
         Returns:
-            list: [description]
+            dict
         """
         urls = self.getURLs()
         contents: list = []
         if self.crawl:
             for url in urls:
                 try:
-                    req: Response = requests.get(url)
-                    contents.append(req.text)
+                    if url is not None:
+                        req: Response = requests.get(url)
+                        contents.append(req.text)
                 except requests.exceptions.MissingSchema:
                     pass
         else:
             req: Response = requests.get(self.url)
             contents.append(req.text)
         contents = Scrapper(contents=contents).clean()
-
-        return contents
+        return {"text": contents, "urls": urls}

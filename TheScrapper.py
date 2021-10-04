@@ -43,7 +43,7 @@ except MissingSchema:
 
 url: str = args.url
 scrap = Scrapper(url=url, crawl=args.crawl)
-IR = InfoReader(content={"text": scrap.getText(), "urls": scrap.getURLs()})
+IR = InfoReader(content=scrap.getText())
 emails: list = IR.getEmails()
 numbers = IR.getPhoneNumber()
 sm: list = IR.getSocials()
