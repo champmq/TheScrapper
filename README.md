@@ -20,6 +20,8 @@ python3 TheScrapper.py --url URL
 python3 TheScrapper.py --url URL --crawl
 # Get more info about the found socialmedia accounts
 python3 TheScrapper.py --url URL -s
+# There are some more args just use:
+python3 TheScrapper.py -h
 ```
 *If you dont like the banner just add "-b".*
 <br>
