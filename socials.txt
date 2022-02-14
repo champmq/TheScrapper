@@ -8,3 +8,4 @@ github.com
 medium.com
 reddit.com
 pinterest.com
+tiktok.com
