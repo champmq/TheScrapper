@@ -18,7 +18,7 @@ pip3 install -r requirements.txt
 python3 TheScrapper.py --url URL
 # Use found URLS and scan them too
 python3 TheScrapper.py --url URL --crawl
-# Get more info about the found socialmedia accounts
+# Get more info about the found SocialMedia accounts
 python3 TheScrapper.py --url URL -s
 # There are some more args just use:
 python3 TheScrapper.py -h
@@ -29,9 +29,6 @@ python3 TheScrapper.py -h
 ## SocialMedia
 If you want to add more SocialMedia sites just append them to the [`socials.txt`](./socials.txt) file and if you want, you can add them with a [pull request](https://www.lifewire.com/best-products-4781319).
 
-## TODO
- - [ ] Verbose Mode
- - [ ] API
 
 # Bugs or ideas?
 If you find any bug or if you have some ideas create an [issue](https://github.com/champmq/TheScrapper/issues).

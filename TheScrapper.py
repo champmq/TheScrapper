@@ -25,15 +25,24 @@ parser.add_argument("-u", "--url", required=False,
                     help="The URL of the target.")
 parser.add_argument("-us", "--urls", required=False,
                     help="The URL of the target.")
-parser.add_argument("-c", "--crawl", default=True, required=False, action="store_true",
+parser.add_argument("-c", "--crawl", default=False, required=False, action="store_true",
                     help="Use every URL found on the site and hunt it down for information.")
 parser.add_argument("-b", "--banner", default=False, required=False, action="store_true",
                     help="Use every URL found on the site and hunt it down for information.")
-parser.add_argument("-s", "--sm", default=True, required=False, action="store_true",
+parser.add_argument("-s", "--sm", default=False, required=False, action="store_true",
                     help="Extract infos from the SocialMedia accounts.")
-parser.add_argument("-o", "--output", default=True, required=False, action="store_true",
+parser.add_argument("-o", "--output", default=False, required=False, action="store_true",
                     help="Save the output in a JSON file.")
+parser.add_argument("-v", "--verbose", default=False, required=False, action="store_true",
+                    help="Verbose output mode.")
 args = parser.parse_args()
+
+
+def verbPrint(content: str):
+    if args.verbose:
+        print(content)
+    pass
+
 
 target_type = ""
 if not args.url and not args.urls:
@@ -57,11 +66,14 @@ if target_type == "URL":
         raise "MissingSchema, please add http(s). Example: https://example.com"
 
     url: str = args.url
+    verbPrint("Scraping (and crawling) started")
     scrap = Scrapper(url=url, crawl=args.crawl)
+    verbPrint("Scraping (and crawling) done\nReading and sorting information")
     IR = InfoReader(content=scrap.getText())
     emails: list = IR.getEmails()
     numbers = IR.getPhoneNumber()
     sm: list = IR.getSocials()
+    verbPrint("Reading and sorting information done")
 
     print("\n")
     print("E-Mails: " + "\n - ".join(emails))
@@ -86,7 +98,8 @@ if target_type == "URL":
             "SocialMedia": sm,
             "Numbers": numbers
         }
-        json.dump(out, open(f"output/{url}.json", "w+"), indent=4)
+        file_name = url.lower().replace("http://", "").replace("https://", "").replace("/", "")
+        json.dump(out, open(f"output/{file_name}.json", "w+"), indent=4)
 
 elif target_type == "FILE":
     out = []
@@ -100,7 +113,9 @@ elif target_type == "FILE":
         except MissingSchema:
             print(f"[-] MissingSchema for {url}, please add http(s). Example: https://example.com.")
 
+        verbPrint("Scraping (and crawling) started")
         scrap = Scrapper(url=url, crawl=args.crawl)
+        verbPrint("Scraping (and crawling) done\nReading and sorting information")
         IR = InfoReader(content=scrap.getText())
         emails: list = IR.getEmails()
         numbers = IR.getPhoneNumber()
@@ -111,6 +126,7 @@ elif target_type == "FILE":
             "SocialMedia": sm,
             "Numbers": numbers
         })
+        verbPrint("Reading and sorting information done")
         print("E-Mails:\n" + "\n - ".join(emails))
         print("Numbers:\n" + "\n - ".join(numbers))
         if args.sm:
@@ -128,4 +144,5 @@ elif target_type == "FILE":
         else:
             print("SocialMedia: " + ", ".join(sm))
     if args.output:
-        json.dump(out, open(f"output/{args.urls}.json", "w+"), indent=4)
+        file_name = args.urls.replace("/", "_")
+        json.dump(out, open(f"output/{file_name}.json", "w+"), indent=4)
