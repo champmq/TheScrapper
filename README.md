@@ -29,6 +29,8 @@ python3 TheScrapper.py -h
 ## SocialMedia
 If you want to add more SocialMedia sites just append them to the [`socials.txt`](./socials.txt) file and if you want, you can add them with a [pull request](https://www.lifewire.com/best-products-4781319).
 
+## ToDo
+ - Add extra options for the extracting part (-e (--email) -n (--number) -sm (--socialmedia))
 
 # Bugs or ideas?
 If you find any bug or if you have some ideas create an [issue](https://github.com/champmq/TheScrapper/issues).
