@@ -1,10 +1,11 @@
+import json
 from argparse import ArgumentParser
 
-import json
 import requests
 from requests.exceptions import MissingSchema
-from modules.scrapper import Scrapper
+
 from modules.info_reader import InfoReader
+from modules.scrapper import Scrapper
 
 banner: str = """
 ▄▄▄█████▓ ██░ ██ ▓█████   ██████  ▄████▄   ██▀███   ▄▄▄       ██▓███   ██▓███  ▓█████  ██▀███  

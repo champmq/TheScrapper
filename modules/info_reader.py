@@ -1,5 +1,7 @@
 import re
 import string
+
+import requests.exceptions
 from socid_extractor import parse, extract
 from typing import List
 
@@ -92,6 +94,9 @@ class InfoReader:
         urls = self.getSocials()
         sm_info = []
         for url in urls:
-            text, _ = parse(url)
-            sm_info.append({"url": url, "info": extract(text)})
+            try:
+                text, _ = parse(url)
+                sm_info.append({"url": url, "info": extract(text)})
+            except Exception: #Quick fix for now
+                pass
         return sm_info
