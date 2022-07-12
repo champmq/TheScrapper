@@ -36,4 +36,4 @@ If you want to add more SocialMedia sites just append them to the [`socials.txt`
 If you find any bug or if you have some ideas create an [issue](https://github.com/champmq/TheScrapper/issues).
 
 ## Known Problems
-If you use a website that is also included in the `socials.txt` file, then the <br> `--sm` flag can have a pretty useless output, so try to avoid those URLS.
+If you use a website that is also included in the `socials.txt` file, then the <br> `--sm` flag can have a pretty useless output, so try to avoid those URLS or just dont use `--sm`.
