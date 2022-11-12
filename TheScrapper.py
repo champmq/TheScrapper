@@ -1,4 +1,3 @@
-import os 
 import json
 from argparse import ArgumentParser
 
