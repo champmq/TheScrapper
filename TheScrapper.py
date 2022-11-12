@@ -1,3 +1,4 @@
+import os 
 import json
 from argparse import ArgumentParser
 
@@ -58,13 +59,12 @@ if not args.banner:
     print(banner)
 
 if target_type == "URL":
-    print(
-        "*" * 50 + "\n" + f"Target: {args.url}" + "\n" + "*" * 50 + "\n")
+    if "https://" not in args.url: 
+        args.url = "https://" + args.url 
 
-    try:
-        requests.get(args.url)
-    except MissingSchema:
-        raise "MissingSchema, please add http(s). Example: https://example.com"
+    print("*" * 50 + "\n" + f"Target: {args.url}" + "\n" + "*" * 50 + "\n")
+
+    requests.get(args.url)
 
     url: str = args.url
     verbPrint("Scraping (and crawling) started")
@@ -107,13 +107,13 @@ elif target_type == "FILE":
     for url in open(args.urls, "r").readlines():
         url = url.replace("\n", "")
         print("\n\n")
-        print("*" * 50 + "\n" + f"Target: {url}\n" + "*" * 50)
+        
+        if "https://" not in url: 
+            url = "https://" + url 
 
-        try:
-            requests.get(url)
-        except MissingSchema:
-            print(f"[-] MissingSchema for {url}, please add http(s). Example: https://example.com.")
+        print("*" * 50 + "\n" + f"Target: {url}" + "\n" + "*" * 50 + "\n")
 
+        requests.get(url)
         verbPrint("Scraping (and crawling) started")
         scrap = Scrapper(url=url, crawl=args.crawl)
         verbPrint("Scraping (and crawling) done\nReading and sorting information")
@@ -144,6 +144,7 @@ elif target_type == "FILE":
                     print(f" - {url}")
         else:
             print("SocialMedia: " + ", ".join(sm))
+
     if args.output:
         file_name = args.urls.replace("/", "_")
         json.dump(out, open(f"output/{file_name}.json", "w+"), indent=4)
