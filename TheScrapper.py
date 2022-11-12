@@ -58,7 +58,7 @@ if not args.banner:
     print(banner)
 
 if target_type == "URL":
-    if "https://" not in args.url: 
+    if "https://" not in args.url or "http://" not in args.url: 
         args.url = "https://" + args.url 
 
     print("*" * 50 + "\n" + f"Target: {args.url}" + "\n" + "*" * 50 + "\n")
