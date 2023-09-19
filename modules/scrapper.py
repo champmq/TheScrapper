@@ -40,7 +40,10 @@ class Scrapper:
 
             cleaned: str = soup.get_text()
             lines: object = (line.strip() for line in cleaned.splitlines())
-            chunks: object = (phrase.strip() for line in lines for phrase in line.split("  "))
+            chunks: object = (
+                phrase.strip()
+                for line in lines for phrase in line.split("  ")
+            )
             contents.append('\n'.join(chunk for chunk in chunks if chunk))
 
         return contents

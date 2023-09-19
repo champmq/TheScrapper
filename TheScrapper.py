@@ -98,7 +98,8 @@ if target_type == "URL":
             "SocialMedia": sm,
             "Numbers": numbers
         }
-        file_name = url.lower().replace("http://", "").replace("https://", "").replace("/", "")
+        file_name = url.lower().replace(
+            "http://", "").replace("https://", "").replace("/", "")
         json.dump(out, open(f"output/{file_name}.json", "w+"), indent=4)
 
 elif target_type == "FILE":
@@ -106,9 +107,9 @@ elif target_type == "FILE":
     for url in open(args.urls, "r").readlines():
         url = url.replace("\n", "")
         print("\n\n")
-        
-        if "https://" not in url: 
-            url = "https://" + url 
+
+        if "https://" not in url:
+            url = "https://" + url
 
         print("*" * 50 + "\n" + f"Target: {url}" + "\n" + "*" * 50 + "\n")
 
