@@ -97,6 +97,6 @@ class InfoReader:
             try:
                 text, _ = parse(url)
                 sm_info.append({"url": url, "info": extract(text)})
-            except Exception: #Quick fix for now
+            except Exception:  # Quick fix for now
                 pass
         return sm_info
