@@ -66,6 +66,3 @@ If you wish to add more social media sites for scraping, you can do so by append
 Feel free to contribute by submitting a pull request if you'd like to share your additions with the community.
 
 ### LICENSE - [GNU](LICENSE)
----
-Built by [champmq](https://github.com/champmq) -- also check out [CoSINT](https://github.com/champmq/cosint), an
-AI-powered OSINT runtime.
